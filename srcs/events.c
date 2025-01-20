@@ -6,7 +6,7 @@
 /*   By: maxweert <maxweert@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 18:21:43 by maxweert          #+#    #+#             */
-/*   Updated: 2025/01/17 18:48:14 by maxweert         ###   ########.fr       */
+/*   Updated: 2025/01/20 03:31:04 by maxweert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,21 @@
 
 int	leave(t_data *data)
 {
+	int	i;
+
+	i = 0;
+	mlx_destroy_image(data->mlx, data->img.img);
 	mlx_destroy_window(data->mlx, data->win);
 	mlx_destroy_display(data->mlx);
 	free(data->mlx);
+	while (i < data->map.height)
+	{
+		free(data->map.colors_arr[i]);
+		free(data->map.z_arr[i]);
+		i++;
+	}
+	free(data->map.colors_arr);
+	free(data->map.z_arr);
 	exit(0);
 }
 
